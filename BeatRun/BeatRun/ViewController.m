@@ -404,10 +404,10 @@
     
     if (_nowInt == _warmUp) {
         // 曲検索用のナンバーを作成
-        NSNumber* bpmNum = [NSNumber numberWithInt:_warmUp];
+        NSNumber* bpmNum = [NSNumber numberWithInt:_basic];
         
         // 現在使用しているBPM値を保存
-        _nowInt = _warmUp;
+        _nowInt = _basic;
         
         // 曲を取得する前に初期化
         _itemsArray = [[NSMutableArray alloc] init];
@@ -420,13 +420,13 @@
         }
         
 //        for (int i = 1; i < 5; i++) {
-//            bpmNum = [NSNumber numberWithInt:_warmUp + i];
+//            bpmNum = [NSNumber numberWithInt:_basic + i];
 //            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
 //                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
 //                    [_itemsArray addObject:item];
 //                }
 //            }
-//            bpmNum = [NSNumber numberWithInt:_warmUp - i];
+//            bpmNum = [NSNumber numberWithInt:_basic - i];
 //            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
 //                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
 //                    [_itemsArray addObject:item];
