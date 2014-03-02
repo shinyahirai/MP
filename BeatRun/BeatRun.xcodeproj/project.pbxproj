@@ -25,6 +25,7 @@
 		656C144E18BF86640056D384 /* BeatRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C144D18BF86640056D384 /* BeatRunTests.m */; };
 		656C145818BF86A50056D384 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656C145718BF86A50056D384 /* MediaPlayer.framework */; };
 		656C146918C020A80056D384 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C146818C020A80056D384 /* EFCircularSlider.m */; };
+		6591F14418C3471600FF75D0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591F14318C3471600FF75D0 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		656C145718BF86A50056D384 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		656C146718C020A80056D384 /* EFCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFCircularSlider.h; sourceTree = "<group>"; };
 		656C146818C020A80056D384 /* EFCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFCircularSlider.m; sourceTree = "<group>"; };
+		6591F14218C3471600FF75D0 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		6591F14318C3471600FF75D0 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				656C143418BF86640056D384 /* Main_iPad.storyboard */,
 				656C143718BF86640056D384 /* ViewController.h */,
 				656C143818BF86640056D384 /* ViewController.m */,
+				6591F14218C3471600FF75D0 /* SettingsViewController.h */,
+				6591F14318C3471600FF75D0 /* SettingsViewController.m */,
 				656C143A18BF86640056D384 /* Images.xcassets */,
 				656C142618BF86640056D384 /* Supporting Files */,
 			);
@@ -276,6 +281,7 @@
 			files = (
 				656C146918C020A80056D384 /* EFCircularSlider.m in Sources */,
 				656C143918BF86640056D384 /* ViewController.m in Sources */,
+				6591F14418C3471600FF75D0 /* SettingsViewController.m in Sources */,
 				656C143018BF86640056D384 /* AppDelegate.m in Sources */,
 				656C142C18BF86640056D384 /* main.m in Sources */,
 			);

@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "EFCircularSlider.h"
+#import "AppDelegate.h"
 
 @interface ViewController : UIViewController 
 
@@ -18,15 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *songPlayTimeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *playAndPauseButton;
-@property (weak, nonatomic) IBOutlet UIButton *skipToPreviousButton;
-@property (weak, nonatomic) IBOutlet UIButton *skipToNextButton;
 @property (weak, nonatomic) IBOutlet UIImageView *artworkImage;
 @property (weak, nonatomic) IBOutlet UIImageView *miniArtworkImage;
 @property (weak, nonatomic) IBOutlet UIView *gradationView;
-
-- (IBAction)playAndPause:(id)sender;
-- (IBAction)skipToPrevious:(id)sender;
-- (IBAction)skipToNext:(id)sender;
 
 @end

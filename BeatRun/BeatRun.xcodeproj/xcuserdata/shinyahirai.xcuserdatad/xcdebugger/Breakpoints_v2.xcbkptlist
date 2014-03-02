@@ -9,29 +9,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeatRun/ViewController.m"
-            timestampString = "415272297.150176"
+            filePath = "BeatRun/SettingsViewController.m"
+            timestampString = "415453599.380564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "-playAndPause:"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeatRun/ViewController.m"
-            timestampString = "415272297.150176"
+            timestampString = "415459207.958502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "-updateSeekSliderDisplay:"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "-getLowCollection"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
