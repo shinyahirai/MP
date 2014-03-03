@@ -25,6 +25,11 @@
 		656C144E18BF86640056D384 /* BeatRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C144D18BF86640056D384 /* BeatRunTests.m */; };
 		656C145818BF86A50056D384 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656C145718BF86A50056D384 /* MediaPlayer.framework */; };
 		656C146918C020A80056D384 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C146818C020A80056D384 /* EFCircularSlider.m */; };
+		6591F14418C3471600FF75D0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591F14318C3471600FF75D0 /* SettingsViewController.m */; };
+		6591F14618C3EF4E00FF75D0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6591F14518C3EF4E00FF75D0 /* CoreMotion.framework */; };
+		6591F14818C3F5FB00FF75D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6591F14718C3F5FB00FF75D0 /* CoreLocation.framework */; };
+		6591F14B18C3FC1D00FF75D0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591F14A18C3FC1D00FF75D0 /* MapViewController.m */; };
+		6591F14D18C3FC6600FF75D0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6591F14C18C3FC6600FF75D0 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +67,13 @@
 		656C145718BF86A50056D384 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		656C146718C020A80056D384 /* EFCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFCircularSlider.h; sourceTree = "<group>"; };
 		656C146818C020A80056D384 /* EFCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFCircularSlider.m; sourceTree = "<group>"; };
+		6591F14218C3471600FF75D0 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		6591F14318C3471600FF75D0 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		6591F14518C3EF4E00FF75D0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		6591F14718C3F5FB00FF75D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6591F14918C3FC1D00FF75D0 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		6591F14A18C3FC1D00FF75D0 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		6591F14C18C3FC6600FF75D0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6591F14D18C3FC6600FF75D0 /* MapKit.framework in Frameworks */,
+				6591F14818C3F5FB00FF75D0 /* CoreLocation.framework in Frameworks */,
+				6591F14618C3EF4E00FF75D0 /* CoreMotion.framework in Frameworks */,
 				656BAD3C18C077E400B124DE /* QuartzCore.framework in Frameworks */,
 				656C145818BF86A50056D384 /* MediaPlayer.framework in Frameworks */,
 				656C142218BF86640056D384 /* CoreGraphics.framework in Frameworks */,
@@ -112,6 +127,9 @@
 		656C141E18BF86640056D384 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6591F14C18C3FC6600FF75D0 /* MapKit.framework */,
+				6591F14718C3F5FB00FF75D0 /* CoreLocation.framework */,
+				6591F14518C3EF4E00FF75D0 /* CoreMotion.framework */,
 				656BAD3B18C077E400B124DE /* QuartzCore.framework */,
 				656C145718BF86A50056D384 /* MediaPlayer.framework */,
 				656C141F18BF86640056D384 /* Foundation.framework */,
@@ -132,6 +150,10 @@
 				656C143418BF86640056D384 /* Main_iPad.storyboard */,
 				656C143718BF86640056D384 /* ViewController.h */,
 				656C143818BF86640056D384 /* ViewController.m */,
+				6591F14918C3FC1D00FF75D0 /* MapViewController.h */,
+				6591F14A18C3FC1D00FF75D0 /* MapViewController.m */,
+				6591F14218C3471600FF75D0 /* SettingsViewController.h */,
+				6591F14318C3471600FF75D0 /* SettingsViewController.m */,
 				656C143A18BF86640056D384 /* Images.xcassets */,
 				656C142618BF86640056D384 /* Supporting Files */,
 			);
@@ -276,6 +298,8 @@
 			files = (
 				656C146918C020A80056D384 /* EFCircularSlider.m in Sources */,
 				656C143918BF86640056D384 /* ViewController.m in Sources */,
+				6591F14418C3471600FF75D0 /* SettingsViewController.m in Sources */,
+				6591F14B18C3FC1D00FF75D0 /* MapViewController.m in Sources */,
 				656C143018BF86640056D384 /* AppDelegate.m in Sources */,
 				656C142C18BF86640056D384 /* main.m in Sources */,
 			);
