@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Item-->
+        <!--View Controller - Music-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
@@ -62,7 +62,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="zY5-8K-9CG"/>
+                    <tabBarItem key="tabBarItem" title="Music" id="zY5-8K-9CG"/>
                     <connections>
                         <outlet property="artistLabel" destination="bOI-QC-Sbk" id="hNI-Uc-4WS"/>
                         <outlet property="artworkImage" destination="ktZ-El-e28" id="Aos-ea-R87"/>
@@ -75,7 +75,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1034" y="86"/>
+            <point key="canvasLocation" x="1034" y="-98"/>
+        </scene>
+        <!--Map View Controller - Map-->
+        <scene sceneID="f95-aC-LBQ">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="5XF-K3-OGX" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RAW-d0-FEQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="kKc-ID-Gjo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NJb-M0-TQe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e2g-b1-Lx1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObA-vs-Nh0">
+                                <rect key="frame" x="137" y="469" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapBtn:" destination="5XF-K3-OGX" eventType="touchUpInside" id="Oif-kN-b9w"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="CBa-f6-yXD"/>
+                    <connections>
+                        <outlet property="mapView" destination="e2g-b1-Lx1" id="JTU-Hj-m3P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wd9-0u-Ggv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1535" y="127"/>
         </scene>
         <!--Settings View Controller - 設定-->
         <scene sceneID="T9v-d4-cGv">
@@ -114,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QLl-pD-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1560" y="1246"/>
+            <point key="canvasLocation" x="1535" y="1422"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Euc-27-WHf">
@@ -128,18 +166,19 @@
                     </tabBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="KCM-cm-ALe"/>
-                        <segue destination="Os0-bQ-La1" kind="relationship" relationship="viewControllers" id="spT-d4-yAG"/>
+                        <segue destination="5XF-K3-OGX" kind="relationship" relationship="viewControllers" id="uYQ-nd-byV"/>
+                        <segue destination="Os0-bQ-La1" kind="relationship" relationship="viewControllers" id="b6t-LQ-ySV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K3B-SH-Mjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="314" y="630"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Setting-->
         <scene sceneID="lYm-Pa-ygG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Os0-bQ-La1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ccg-I2-lWG"/>
+                    <tabBarItem key="tabBarItem" title="Setting" id="ccg-I2-lWG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8IO-JO-xtW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -152,7 +191,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxf-dG-DLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1034" y="1246"/>
+            <point key="canvasLocation" x="1034" y="1422"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

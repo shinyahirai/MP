@@ -23,6 +23,12 @@
     UISwipeGestureRecognizer* _swipe;
     
     AppDelegate* _appDelegate;
+    
+    // Core Location
+    CLLocationManager* _locationManager;
+    
+    // Core Motion
+    CMMotionManager* _motionManager;
 }
 
 @end
@@ -79,6 +85,11 @@
     _songTitleLabel.text = @"曲が選択されていません";
     _artistLabel.text = @"";
     _bpmLabel.text = @"";
+    _locationManager = [[CLLocationManager alloc] init];
+    _motionManager = [[CMMotionManager alloc] init];
+
+    
+    [UITabBar appearance].barTintColor = [UIColor colorWithRed:168.0f/255.0f green:213.0f/255.0f blue:165.0f/255.0f alpha:1.0f];
     _appDelegate = [[UIApplication sharedApplication] delegate];
     
     
@@ -96,8 +107,8 @@
     size_t numOfComponent = 2;
     CGFloat locations[2] = {0.0, 1.0};
     CGFloat components[8] = {
-        255.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.9f,
-        168.0f/255.0f, 213.0f/255.0f, 165.0f/255.0f, 0.9f
+        168.0f/255.0f, 213.0f/255.0f, 165.0f/255.0f, 0.9f,
+        255.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.9f
     };
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, numOfComponent);
 
@@ -114,7 +125,9 @@
     
     // 曲が流れていれば情報取得
     [self getCurrentMusicInfoAndView];
-    
+    [self startLocationMonitoring];
+    [self coreMotion];
+
     NSLog(@"nowint = %d",_nowInt);
 }
 
@@ -189,6 +202,69 @@
             _songTitleLabel.text = @"曲が選択されていません";
         }
     }
+}
+
+#pragma mark - Core Motion
+- (void)coreMotion {
+    // インスタンスの生成
+//    CMMotionManager *manager = [[CMMotionManager alloc] init];
+    
+    // dispatch
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    
+    // 現在、加速度センサー無しのデバイスは存在しないが念のための確認
+    if (_motionManager.accelerometerAvailable) {
+        // センサーの更新間隔の指定
+        _motionManager.accelerometerUpdateInterval = 1.0;  // 100Hz
+        
+        // ハンドラを指定
+        CMAccelerometerHandler handler = ^(CMAccelerometerData *data, NSError *error) {
+            // 非同期処理
+            
+            dispatch_async(globalQueue, ^{
+                // 同期処理
+                dispatch_async(mainQueue, ^{
+                    double timestamp = data.timestamp;  // 更新時刻
+                    double x = data.acceleration.x;
+                    double y = data.acceleration.y;
+                    double z = data.acceleration.z;
+                    
+                    NSLog(@"timestamp = %f\nx = %f\ny = %f\nz = %f",timestamp,x,y,z);
+                    // x, y, zの値を必要に応じて、ローパス・ハイパスなどのフィルタを適用する
+                });
+            });
+        };
+        
+        // センサーの利用開始
+        [_motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:handler];
+        
+//        // (不必要になったら)センサーの停止
+//        if (manager.accelerometerActive) {
+//            [manager stopAccelerometerUpdates];
+//        }
+    }
+}
+
+#pragma mark - Core Location
+-(void)startLocationMonitoring
+{
+	if(_locationManager == nil)
+	{
+		_locationManager = [[CLLocationManager alloc] init];
+	}
+	_locationManager.delegate = self;
+    
+	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	_locationManager.distanceFilter = 5.0f;
+    
+	[_locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager
+   didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+	NSLog(@"%@",newLocation.timestamp);
 }
 
 #pragma mark - Touch Event
@@ -314,20 +390,20 @@
             }
         }
         
-//        for (int i = 1; i < 5; i++) {
-//            bpmNum = [NSNumber numberWithInt:_basic + i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//            bpmNum = [NSNumber numberWithInt:_basic - i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//        }
+        for (int i = 1; i < 5; i++) {
+            bpmNum = [NSNumber numberWithInt:_basic + i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+            bpmNum = [NSNumber numberWithInt:_basic - i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+        }
     }
 }
 
@@ -351,20 +427,20 @@
             }
         }
         
-//        for (int i = 1; i < 5; i++) {
-//            bpmNum = [NSNumber numberWithInt:_basic + i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//            bpmNum = [NSNumber numberWithInt:_basic - i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//        }
+        for (int i = 1; i < 5; i++) {
+            bpmNum = [NSNumber numberWithInt:_basic + i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+            bpmNum = [NSNumber numberWithInt:_basic - i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+        }
     } else if (_nowInt == _basic) {
         
         // 現在使用しているBPM値を保存
@@ -383,20 +459,22 @@
             }
         }
         
-//        for (int i = 1; i < 5; i++) {
-//            bpmNum = [NSNumber numberWithInt:_warmUp + i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//            bpmNum = [NSNumber numberWithInt:_warmUp - i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//        }
+        for (int i = 1; i < 5; i++) {
+            bpmNum = [NSNumber numberWithInt:_warmUp + i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+            bpmNum = [NSNumber numberWithInt:_warmUp - i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+        }
+    } else if (_nowInt == _warmUp) {
+        _itemsArray = [[NSMutableArray alloc] init];
     }
 }
 
@@ -419,20 +497,20 @@
             }
         }
         
-//        for (int i = 1; i < 5; i++) {
-//            bpmNum = [NSNumber numberWithInt:_basic + i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//            bpmNum = [NSNumber numberWithInt:_basic - i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//        }
+        for (int i = 1; i < 5; i++) {
+            bpmNum = [NSNumber numberWithInt:_basic + i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+            bpmNum = [NSNumber numberWithInt:_basic - i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+        }
     } else if (_nowInt == _basic) {
         // 曲検索用のナンバーを作成
         NSNumber* bpmNum = [NSNumber numberWithInt:_training];
@@ -450,30 +528,32 @@
             }
         }
         
-//        for (int i = 1; i < 5; i++) {
-//            bpmNum = [NSNumber numberWithInt:_training + i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//            bpmNum = [NSNumber numberWithInt:_training - i];
-//            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
-//                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
-//                    [_itemsArray addObject:item];
-//                }
-//            }
-//        }
+        for (int i = 1; i < 15; i++) {
+            bpmNum = [NSNumber numberWithInt:_training + i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+            bpmNum = [NSNumber numberWithInt:_training - i];
+            for (MPMediaItem* item in [[MPMediaQuery songsQuery] items]) {
+                if ( [[item valueForProperty:MPMediaItemPropertyBeatsPerMinute] isEqualToNumber: bpmNum]) {
+                    [_itemsArray addObject:item];
+                }
+            }
+        }
+    } else if (_nowInt == _training) {
+        _itemsArray = [[NSMutableArray alloc] init];
     }
 }
 
 - (void)startMusic {
-    // デバッグ用
-    for( MPMediaItem* music in _itemsArray) {
-        NSString* songTitle = [music valueForProperty:MPMediaItemPropertyTitle];
-        NSString* songBpm = [[music valueForProperty:MPMediaItemPropertyBeatsPerMinute] stringValue];
-        NSLog(@"%@ %@", songTitle, songBpm);
-    }
+//    // デバッグ用
+//    for( MPMediaItem* music in _itemsArray) {
+//        NSString* songTitle = [music valueForProperty:MPMediaItemPropertyTitle];
+//        NSString* songBpm = [[music valueForProperty:MPMediaItemPropertyBeatsPerMinute] stringValue];
+//        NSLog(@"%@ %@", songTitle, songBpm);
+//    }
     
     // 再生
     if (_itemsArray.count != 0 && _itemsArray) {

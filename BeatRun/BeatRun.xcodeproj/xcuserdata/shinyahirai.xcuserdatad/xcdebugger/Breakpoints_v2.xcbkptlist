@@ -22,16 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeatRun/ViewController.m"
-            timestampString = "415459207.958502"
+            timestampString = "415496819.669861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
-            landmarkName = "-getLowCollection"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-coreMotion"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
